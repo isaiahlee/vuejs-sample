@@ -8,6 +8,20 @@
 # install dependencies
 npm install
 
+# window host file -> 127.0.0.1 local.vuejs.com add
+
+# nginx install and modify config , use 80 port
+	server {
+	   listen 80;
+	   server_name local.vuejs.com;
+
+	   location / {
+	       proxy_set_header   X-Real-IP $remote_addr;
+	       proxy_set_header   Host      $http_host;
+	       proxy_pass         http://local.vuejs.com:8081;
+	   }
+	}
+
 # serve with hot reload at localhost:8080
 npm run dev
 
